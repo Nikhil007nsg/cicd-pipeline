@@ -1,7 +1,7 @@
 pipeline{
-    agent{
-        label "kubeagent"
-    }
+    agent any //{
+    //    label "kubeagent"
+    //}
     tools {
         jdk 'java17'
         maven 'maven3'
