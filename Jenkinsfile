@@ -1,6 +1,6 @@
 pipeline{
     agent{
-        label "kube-agent"
+        label "kubeagent"
     }
     tools {
         jdk 'java17'
