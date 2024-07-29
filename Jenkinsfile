@@ -1,5 +1,5 @@
 pipeline{
-    agent any //{
+    agent any//{
     //    label "kubeagent"
     //}
     tools {
@@ -17,8 +17,17 @@ pipeline{
             steps{
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/Nikhil007nsg/cicd-pipeline'
                 
+            } 
+        }
+        stage("Build Application") {
+            steps {
+                sh "mvn clean package"
             }
-         
+        }
+        stage("Test Application") {
+            steps {
+                sh "mvn test"
+            }
         }
     }
 }  
