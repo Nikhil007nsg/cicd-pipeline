@@ -1,7 +1,9 @@
 pipeline{
-    agent any//{
-    //    label "kubeagent"
-    //}
+    agent {
+        kubernetes {
+            inheritFrom "kube-agent"
+        }
+    }
     tools {
         jdk 'java17'
         maven 'maven3'
@@ -27,6 +29,16 @@ pipeline{
         stage("Test Application") {
             steps {
                 sh "mvn test"
+            }
+        }
+        stage("sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId:'jenkins-sonarqube') {
+                        
+                    }
+                }
+                
             }
         }
     }
