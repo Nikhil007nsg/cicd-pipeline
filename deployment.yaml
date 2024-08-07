@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-pipeline
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cicd-pipeline
+  template:
+    metadata:
+      labels:
+        app: cicd-pipeline
+    spec:
+      containers:
+      - name: cicd
+        image: nikhilsg/cicd-pipeline:1.0.0-53
+        resources:
+           memory: "300Mi"
+           cpu: "500m"
+        ports:
+         - containerPort: 8080
+        
