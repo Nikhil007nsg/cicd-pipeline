@@ -98,8 +98,8 @@ pipeline{
                   //  container('docker') {
                         withCredentials([string(credentialsId: 'JENKINS_API_TOKEN', variable: 'TOKEN')]) {
                          withEnv(["TOKEN=$TOKEN"]) {
+                           sh 'apk add --no-cache curl'  
                             sh '''
-                            apk add --no-cache curl &&
                             curl -v -k --user admin:$TOKEN \
                             -X POST -H "cache-control: no-cache" \
                             -H "content-type: application/x-www-form-urlencoded" \
