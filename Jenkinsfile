@@ -7,7 +7,6 @@ pipeline{
     tools {
         jdk 'java22'
         maven 'maven3'
-        docker 'docker'
     }
     environment {
         APP_NAME = "cicd-pipeline"
