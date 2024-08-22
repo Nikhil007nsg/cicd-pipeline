@@ -62,7 +62,7 @@ pipeline{
         stage('Build & Push Docker Image') {
             steps {
                 script {
-                    container('jnlp') {
+                    container('docker') {
                         docker.withRegistry('https://index.docker.io/v1/', "$DOCKER_PASS") {
                             docker_image = docker.build("${IMAGE_NAME}")
                             docker_image.push("${IMAGE_TAG}")
