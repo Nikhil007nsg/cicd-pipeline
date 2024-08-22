@@ -97,7 +97,7 @@ pipeline{
                 script {
                     container('docker') {
                         withCredentials([string(credentialsId: 'JENKINS_API_TOKEN', variable: 'TOKEN')]) {
-                            sh "curl -v -k --user admin:${TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://172.27.22.181:32000/job/cicd-pipeline/buildWithParameters?token=gitops-token'"
+                            sh "curl -v -k --user admin:${TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'https://172.27.22.181:32000/job/cicd-pipeline/buildWithParameters?token=gitops-token'"
                 }
             }
             }
