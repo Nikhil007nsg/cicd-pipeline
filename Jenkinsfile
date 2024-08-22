@@ -82,8 +82,7 @@ pipeline{
             }
         }
         }     
-        stages {
-          stage('Install curl') {
+        stage('Install curl') {
             steps {
                 script {
                     container('docker') {
@@ -91,7 +90,16 @@ pipeline{
                 }
             }
         }
-  
-          }        
+     }   
+      stage("Trigger CD Pipeline") {
+            steps {
+                script {
+                    container('docker') {
+                    sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://172.27.22.181:32000/job/cicd-pipeline/buildWithParameters?token=gitops-token'"
+                }
+            }
+            }
+        }
+        
     }
 }  
