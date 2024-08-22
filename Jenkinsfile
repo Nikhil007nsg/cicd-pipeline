@@ -86,7 +86,8 @@ pipeline{
             steps {
                 script {
                     container('docker') {
-                    sh 'apt-get update && apt-get install -y curl' 
+            //        sh 'apt-get update && apt-get install -y curl'
+                      sh 'apk add --no-cache curl'  
                 }
             }
         }
