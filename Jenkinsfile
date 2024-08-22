@@ -72,15 +72,6 @@ pipeline{
                 }
             }
         }
-   //     stage("Trivy Scan") {
-    //        steps {
-     //           script {
-//	          container('docker') {
-//		   sh ('docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image nikhilsg/cicd-pipeline:latest --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table')
-  //              }
-    //        }
-//	}
-  //      }
         stage ('Cleanup Artifacts') {
             steps {
                 script { 
@@ -91,25 +82,16 @@ pipeline{
             }
         }
         }     
-        stage("Trigger CD Pipeline") {
+        stages {
+          stage('Install curl') {
             steps {
-               script {
+                script {
                     container('docker') {
-                      withCredentials([string(credentialsId: 'JENKINS_API_TOKEN', variable: 'TOKEN')]) {
-                        sh '''
-                          curl -v -k --user admin:$TOKEN \
-                          -X POST -H "cache-control: no-cache" \
-                           -H "content-type: application/x-www-form-urlencoded" \
-                           --data "IMAGE_TAG=${IMAGE_TAG}" \
-                          "http://172.27.22.181:32000/job/cicd-pipeline/buildWithParameters?token=gitops-token"
-                      '''
+                    sh 'apt-get update && apt-get install -y curl' 
                 }
             }
         }
-    }
-}
- 
   
-        
+          }        
     }
 }  
