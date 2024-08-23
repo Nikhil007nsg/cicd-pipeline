@@ -95,7 +95,7 @@ pipeline{
       stage("Trigger CD Pipeline") {
             steps {
                 script {
-                  //  container('docker') {
+                    container('docker') {
                         withCredentials([string(credentialsId: 'JENKINS_API_TOKEN', variable: 'TOKEN')]) {
                          withEnv(["TOKEN=$TOKEN"]) {
                            sh 'apk add --no-cache curl'  
