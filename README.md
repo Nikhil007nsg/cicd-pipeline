@@ -94,8 +94,11 @@
        > add git repository in argocd username(github),> password (github=token),
 # create ci jobs in jenkins 
   1 - we have one github repo which contain our code and dockerfile and Jenkinsfile in root > that repo we have to mention in ci jobs 
+  
   2 - for cd jobs create new job in jenkins name of cd jobs > create another repo in github with name of cd-pipeline > which contain deployment.yaml,service.yaml and jenkinsfile in root.
+  
   3 - In jenkins cd jobs click on project is parametrized > mention IMAGE_TAG > click on trigger build remotely mention authontication token name like gitops-token >
+  
        mention github cd repo and save it.
 
 
